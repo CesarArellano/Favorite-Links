@@ -1,0 +1,33 @@
+CREATE DATABASE database_links;
+
+USE database_links;
+
+--  USERS TABLE
+CREATE TABLE users(
+  idUser INT(11) NOT NULL,
+  username VARCHAR(16) NOT NULL,
+  password VARCHAR(60) NOT NULL,
+  fullname VARCHAR(100) NOT NULL
+);
+
+ALTER TABLE users 
+  ADD PRIMARY KEY(idUser);
+ALTER TABLE users
+  MODIFY idUser INT(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT = 2;
+
+desc users;
+
+--  LINKS TABLES
+CREATE TABLE links(
+  idLink INT(11) NOT NULL,
+  title VARCHAR(150) NOT NULL,
+  url VARCHAR(255) NOT NULL,
+  description TEXT,
+  idUser INT(11),
+  createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT fk_user FOREIGN KEY (idUser) REFERENCES users(idUser)
+  );
+ALTER TABLE links 
+  ADD PRIMARY KEY(idLink);
+ALTER TABLE links
+  MODIFY idLink INT(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT = 2;

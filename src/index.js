@@ -24,6 +24,7 @@ app.use(morgan('dev'));
 app.use(express.urlencoded({extended: false})); // con extended el false le digo que recibiré cadenas, números (algo básico), si está en true podría recibir imágenes etc...
 app.use(express.json());
 
+
 // Global variables
 app.use((req,res,next) =>{
   next();
