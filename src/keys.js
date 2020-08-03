@@ -1,3 +1,4 @@
+// Settings db connection
 module.exports = {
 
   database:{
