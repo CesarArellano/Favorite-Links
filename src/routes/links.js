@@ -15,12 +15,16 @@ router.post('/add', (req,res) => {
     description
   };
   pool.query('INSERT INTO links set ?',[newLink]) /* Petición asincrona, con await le decimos que va a tomar su tiempo, cuando se ejecute siga con el flujo del programa. */
-    .then(() => { res.send('received');})
+    .then(() => { res.redirect('/links');})
 });
 router.get('/', async (req,res) => {
   const links = await pool.query('SELECT * FROM links');
-  console.log(links);
   res.render('links/lists',{ links });
+});
+router.get('/delete/:id',async (req,res) => {
+  const { id } = req.params;
+  await pool.query('DELETE FROM links WHERE idLink = ?',[id]);
+  res.redirect('/links');
 });
 
 
