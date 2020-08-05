@@ -17,5 +17,11 @@ router.post('/add', (req,res) => {
   pool.query('INSERT INTO links set ?',[newLink]) /* Petición asincrona, con await le decimos que va a tomar su tiempo, cuando se ejecute siga con el flujo del programa. */
     .then(() => { res.send('received');})
 });
+router.get('/', async (req,res) => {
+  const links = await pool.query('SELECT * FROM links');
+  console.log(links);
+  res.render('links/lists',{ links });
+});
+
 
 module.exports = router;

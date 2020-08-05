@@ -15,6 +15,9 @@ pool.getConnection((err,connection) => {
     if(err.code === 'ECONNREFUSED'){
       console.error('DATABASE CONNECTION WAS REFUSED');
     }
+    if(err.code === 'ER_BAD_DB_ERROR'){
+      console.error('NAME DATABASE IS WRONG');
+    }
   }
   if(connection) connection.release();
   console.log('DB is Connected');
