@@ -7,6 +7,7 @@ const flash = require('connect-flash');
 const MySQLStore = require('express-mysql-session');
 const passport =require('passport');
 const { database } = require('./keys');
+
 // Initializations
 const app = express();
 require('./lib/passport');
@@ -40,6 +41,7 @@ app.use(passport.session());
 // Global variables
 app.use((req,res,next) =>{
   app.locals.success = req.flash('success');
+  app.locals.message = req.flash('message');
   next();
 })
 
