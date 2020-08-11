@@ -13,14 +13,15 @@ router.post('/add', isLoggedIn, async (req,res) => {
   const newLink = {
     title,
     url,
-    description
+    description,
+    idUser: req.user.idUser,
   };
   await pool.query('INSERT INTO links set ?',[newLink]); /* Petición asincrona, con await le decimos que va a tomar su tiempo, cuando se ejecute siga con el flujo del programa. */
   req.flash('success','Link saved successfully');
   res.redirect('/links');
 });
 router.get('/', isLoggedIn, async (req,res) => {
-  const links = await pool.query('SELECT * FROM links');
+  const links = await pool.query('SELECT * FROM links WHERE idUser = ?',[req.user.idUser]);
   res.render('links/lists',{ links });
 });
 router.get('/delete/:id', isLoggedIn, async (req,res) => {
